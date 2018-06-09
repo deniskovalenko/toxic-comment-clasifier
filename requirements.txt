@@ -4,3 +4,4 @@ requests
 flask-cors
 numpy
 flask-login
+Flask-Caching
