@@ -5,7 +5,7 @@ from flask_login import LoginManager
 from flask_cors import CORS
 import sys
 from flask_caching import Cache
-from PredictionService import PredictionService
+
 
 app = Flask(__name__)
 prediction_service = PredictionService()

@@ -23,3 +23,20 @@ htmlcov/
 *,cover
 .ipynb_checkpoints/
 data/
+
+#Scala/Idea stuff
+logs
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+project/project
+project/target
+tmp
+.history
+dist
+/*.iml
+/out

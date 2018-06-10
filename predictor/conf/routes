@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Prediction endpoint
+GET     /api/:project/predict                           controllers.Application.predict(project : String, api_token : String, comment : String)
+
+# Prediction endpoint
+GET     /api/:project/metric                           controllers.Application.metrics(project : String)
+
+
+
+    
