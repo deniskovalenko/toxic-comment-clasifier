@@ -11,7 +11,7 @@ class PredictionService(object):
         self.models['threat'] = joblib.load('models/threat_lr.pkl')
         self.models['insult'] = joblib.load('models/insult_lr.pkl')
         self.models['identity_hate'] = joblib.load('models/identity_hate_lr.pkl')
-        self.class_names = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+        self.class_names = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
 
     def predict(self, project, parameter):
         scores = {}

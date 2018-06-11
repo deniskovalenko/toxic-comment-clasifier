@@ -3,18 +3,14 @@ import multiprocessing
 from PredictionService import PredictionService
 from kafka import KafkaConsumer, KafkaProducer
 import json
-import time
-
 
 class Producer():
     def __init__(self, topic):
-        self.kafka_producer = KafkaProducer(bootstrap_servers='localhost:9092')
+        self.kafka_producer = KafkaProducer(bootstrap_servers='localhost:9092', value_serializer=lambda v: json.dumps(v).encode('utf-8'))
         self.topic = topic
 
     def send(self, msg, key):
-        # producer = KafkaProducer(bootstrap_servers='localhost:9092')#, value_serializer=lambda v: json.dumps(v).encode('utf-8'))
-        self.kafka_producer.send(self.topic, key=key, value=str(msg).encode())
-        # self.kafka_producer.flush()
+        self.kafka_producer.send(self.topic, key=key, value=msg)
 
 class Consumer(multiprocessing.Process):
     def __init__(self, prediction_service, project, project_topic):
@@ -46,12 +42,10 @@ class Consumer(multiprocessing.Process):
 
         consumer.close()
 
-
 def main():
     prediction_service = PredictionService()
     consumer = Consumer(prediction_service, 'toxic-comments', 'request-toxic-comments')
     consumer.start()
-
 
 if __name__ == "__main__":
     logging.basicConfig(

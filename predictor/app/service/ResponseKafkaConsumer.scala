@@ -1,23 +1,26 @@
 package service
 
+import java.util.Properties
 import java.util.concurrent.Executors
-import java.util.{Properties}
 import javax.inject.Inject
 
 import app.GlobalState
 import org.apache.kafka.clients.consumer.{ConsumerConfig, KafkaConsumer}
 import play.api.Configuration
+
 import scala.collection.JavaConverters._
 
 /**
   * Created by Denys Kovalenko on 10/06/18.
   * denis.v.kovalenko@gmail.com
   */
-class ResponseKafkaConsumer @Inject()(conf : Configuration) {
+class ResponseKafkaConsumer @Inject()(conf: Configuration) {
 
   private val kafkaConsumerTopics = conf.get[String]("api.allowed_topics")
     .split(":")
-    .map(topic =>{ "response-" + topic})
+    .map(topic => {
+      "response-" + topic
+    })
     .toList.asJavaCollection
 
   private val brokers = "localhost:9092"
@@ -58,7 +61,7 @@ class ResponseKafkaConsumer @Inject()(conf : Configuration) {
     })
   }
 
-  def processReceivedScores(key : String, response: String): Unit = {
+  def processReceivedScores(key: String, response: String): Unit = {
     val requestPromise = GlobalState.requestIdPromiseMap(key)
     requestPromise.success(response)
     GlobalState.requestIdPromiseMap.remove(key)
