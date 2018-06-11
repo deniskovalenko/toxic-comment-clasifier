@@ -1,6 +1,6 @@
 import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 
-name := "predictor"
+name := "prediction-api"
 
 version := "1.0"
 

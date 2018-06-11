@@ -8,7 +8,7 @@ services:
     network_mode: "host"
 
   predictor-service:
-    image: predictor:1.0
+    image: denkovalenko/prediction-api:1.0
     ports:
       - "9005:9005"
     network_mode: "host"
@@ -17,8 +17,8 @@ services:
     depends_on:
       - kafka
 
-  model-service:
-    image: model-service:1.0
+  toxic-comment-classifier:
+    image: denkovalenko/toxic-comments-classifier:1.0
     network_mode: "host"
     depends_on:
       - kafka

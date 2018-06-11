@@ -28,14 +28,16 @@ returns average scores, requests per minute and 2 most common labels
 Projects needs 3 containers: 
 
 Kafka container (spotify/kafka), 
-predictor:1.0,
-model-service:1.0
+denkovalenko/prediction-api:1.0,
+denkovalenko/toxic-comments-classifier:1.0
+
+This images are available from dockerhub or you can build them by yourself
 
 cd predictor
 sbt docker:publishLocal
 
 cd ../model-service
-docker build -t model-service:1.0 .
+docker build -t denkovalenko/toxic-comments-classifier:1.0 .
 cd ..
 
 ## Start
