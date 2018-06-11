@@ -36,6 +36,7 @@ class Consumer(multiprocessing.Process):
             for message in consumer:
                 #takes around 1.4 seconds... Batching?
                 result = self.prediction_service.predict(self.project, message.value)
+                print('sending ', result)
                 self.producer.send(result, message.key)
                 if self.stop_event.is_set():
                     break

@@ -1,0 +1,24 @@
+version: "2"
+services:
+  kafka:
+    image: spotify/kafka
+    ports:
+      - "9092:9092"
+      - "2181:2181"
+    network_mode: "host"
+
+  predictor-service:
+    image: predictor:1.0
+    ports:
+      - "9005:9005"
+    network_mode: "host"
+    environment:
+      - api_token=INSERT_YOUR_TOKEN
+    depends_on:
+      - kafka
+
+  model-service:
+    image: model-service:1.0
+    network_mode: "host"
+    depends_on:
+      - kafka

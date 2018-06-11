@@ -1,0 +1,11 @@
+#pip install -r requirements.txt
+kafka-python
+numpy
+scipy
+scikit-learn
+joblib
+
+#numpy==1.14.3
+#scipy==1.1.0
+#scikit-learn==0.19.1
+#joblib==0.11
