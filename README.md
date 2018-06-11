@@ -49,7 +49,11 @@ docker-compose up
 
 ### Pros:
 * Scalability: By separating web service from model service we can scale model throughtput by just deploying more containers, as long as they belong to same Kafka consumer group.
-* Extendibility: Prediction pipeline is model-agnostic - it just passes request to matching kafka topic and displays whatever was send by model
+* Extendibility: Prediction pipeline is model-agnostic - it just passes request to matching kafka topic and displays whatever was send by model.
+So it's fairly easy to add new model:
+
+    1) Deploy new app that will consume requests from "requests-YOUR_NEW_PROJECT" Kafka topic and will publish complete JSON to "response-YOUR_NEW_PROJECT"
+    2) Allow new project in application.conf by adding it's name to colon-separated list "api.allowed_topics"
 * By passing scores through Kafka we can use Kafka Streaming (or other frameworks) to compute statistics about them
 * Metrics are pre-computed, so additional requests from clients won't increase load on Kafka
 * Raw scores from each model are displayed (instead of normalizing so they would add up to 1) - for "neutral" comments we want to expect all scores being low, but with normalization likely one of scores would dominate (say, neutral comment has 0.6 score of being threat)
@@ -63,6 +67,7 @@ docker-compose up
 * Currently deployment is just docker-compose. Some container orchestration tool might be useful.
 * Kafka 'cluster' currently persists inside container which isn't great, need to attach external volume
 * I haven't managed to calculate metrics with Kafka Streaming, so current metrics calculations are quite naive
+* Although it's pretty easy to add new model, for metrics calculations a lot of things are hard-coded.   
 
 
 
