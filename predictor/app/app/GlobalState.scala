@@ -17,5 +17,6 @@ object GlobalState {
   //not really good idea to have var list, but this is prototype (:
   var recentScores = mutable.MutableList.empty[(Long, Response)]
   val emptyMetrics = Metrics(0, Array.empty[String], 0, 0, 0, 0, 0, 0)
+  val mostCommonLabelCountMap = scala.collection.mutable.Map[String, Long]()
   var metrics = emptyMetrics
 }
